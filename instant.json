@@ -1,0 +1,7 @@
+{
+  "id": "emptyboxes",
+  "name": "EmptyBoxes Package",
+  "description": "",
+  "version": "v0.0.0",
+  "dependencies": ["core"]
+}

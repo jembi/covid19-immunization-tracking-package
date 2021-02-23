@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: emptyboxes-mapper-service
+  labels:
+    package: emptyboxes
+spec:
+  type: LoadBalancer
+  selector:
+    component: emptyboxes-mapper
+  ports:
+    - name: emptyboxes-mapper-3003
+      port: 3003
+      targetPort: 3003
