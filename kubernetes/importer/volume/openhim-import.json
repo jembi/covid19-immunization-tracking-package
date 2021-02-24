@@ -26,5 +26,27 @@
       "name": "Test Client"
     }
   ],
+  "Mediators": [
+    {
+      "urn": "covid19-immunization-tracking-mediator",
+      "version": "2.2.2",
+      "name": "Mapping Mediator",
+      "description": "Generic OpenHIM Mapping Mediator",
+      "endpoints": [
+        {
+          "type": "http",
+          "status": "enabled",
+          "forwardAuthHeader": false,
+          "name": "Generic Mapping Mediator",
+          "host": "localhost",
+          "port": 3003
+        }
+      ],
+      "defaultChannelConfig": [],
+      "configDefs": [],
+      "_lastHeartbeat": "2021-02-24T12:55:39.663Z",
+      "_uptime": 300.864322424
+    }
+  ],
   "ContactGroups": []
 }
