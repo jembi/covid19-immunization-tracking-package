@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: covid19immunization-mapper-deployment
+  name: covid19-immunization-mapper-deployment
   labels:
     package: covid19immunization
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: covid19immunization-mapper
+      component: covid19-immunization-mapper
   template:
     metadata:
       labels:
-        component: covid19immunization-mapper
+        component: covid19-immunization-mapper
     spec:
       initContainers:
-        - name: covid19immunization-check-openhim-status
+        - name: covid19-immunization-check-openhim-status
           image: busybox:1.28
           command: ['sh', '-c', 'until telnet openhim-core-service 8082; do echo OpenHIM not running yet; sleep 10; done;']
       containers:
-        - name: covid19immunization-mapper
+        - name: covid19-immunization-mapper
           image: jembi/openhim-mediator-mapping:v2.2.2
           ports:
             - containerPort: 3003
@@ -31,7 +31,7 @@ spec:
             - name: OPENHIM_PASSWORD
               value: instant101
             - name: MONGO_URL
-              value: mongodb://mongo-0.mongo-service,mongo-1.mongo-service,mongo-2.mongo-service/covid19immunization-mediator?replicaSet=mongo-set
+              value: mongodb://mongo-0.mongo-service,mongo-1.mongo-service,mongo-2.mongo-service/covid19-immunization-mediator?replicaSet=mongo-set
             - name: PARSER_LIMIT
               value: 10mb
           resources:
