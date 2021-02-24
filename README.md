@@ -1,4 +1,4 @@
-# EmptyBoxes Package
+# Covid19 Immunization Tracking Package
 
 This package sets up a mapping mediator instance that handles the mapping of COVID-19 vaccinations into FHIR resources.
 
