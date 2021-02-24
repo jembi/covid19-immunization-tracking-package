@@ -1,6 +1,6 @@
 {
-  "id": "emptyboxes",
-  "name": "EmptyBoxes Package",
+  "id": "covid19immunization",
+  "name": "Covid19 Immunization Tracking Package",
   "description": "",
   "version": "v0.0.0",
   "dependencies": ["core"]

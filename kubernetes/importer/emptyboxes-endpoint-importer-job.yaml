@@ -1,38 +1,38 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: emptyboxes-endpoint-importer-job
+  name: covid19immunization-endpoint-importer-job
   labels:
     app.kubernetes.io/name: endpoint-importer
-    app.kubernetes.io/instance: emptyboxes-mapper-endpoint-importer-1
+    app.kubernetes.io/instance: covid19immunization-mapper-endpoint-importer-1
     app.kubernetes.io/version: '0.1'
     app.kubernetes.io/component: endpoint-importer
-    package: emptyboxes
+    package: covid19immunization
 spec:
   backoffLimit: 3
   template:
     spec:
       initContainers:
-        - name: emptyboxes-check-mapper-status
+        - name: covid19immunization-check-mapper-status
           image: busybox:1.28
           command: ['sh', '-c', 'until telnet mapper-service 3003; do echo Mapping mediator not running yet; sleep 10; done;']
       containers:
-        - name: emptyboxes-endpoint-importer
+        - name: covid19immunization-endpoint-importer
           image: jembi/instantohie-config-importer
           args:
             - sh
             - -c
-            - wait-on -t 60000 http-get://emptyboxes-mapper-service:3003/uptime && node endpoint.js
+            - wait-on -t 60000 http-get://covid19immunization-mapper-service:3003/uptime && node endpoint.js
           env:
             - name: MEDIATOR_HOST_NAME
-              value: 'emptyboxes-mapper-service'
+              value: 'covid19immunization-mapper-service'
             - name: MEDIATOR_API_PORT
               value: '3003'
           volumeMounts:
             - mountPath: /importer
-              name: emptyboxes-endpoint-importer
+              name: covid19immunization-endpoint-importer
       restartPolicy: OnFailure
       volumes:
-        - name: emptyboxes-endpoint-importer
+        - name: covid19immunization-endpoint-importer
           configMap:
-            name: emptyboxes-endpoint-importer-configmap
+            name: covid19immunization-endpoint-importer-configmap

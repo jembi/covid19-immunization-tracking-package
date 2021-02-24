@@ -1,23 +1,23 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: emptyboxes-mapper-config-importer-job
+  name: covid19immunization-mapper-config-importer-job
   labels:
     app.kubernetes.io/name: mapper-config-importer
-    app.kubernetes.io/instance: emptyboxes-mapper-config-importer-1
+    app.kubernetes.io/instance: covid19immunization-mapper-config-importer-1
     app.kubernetes.io/version: '0.1'
     app.kubernetes.io/component: config-importer
-    package: emptyboxes
+    package: covid19immunization
 spec:
   backoffLimit: 3
   template:
     spec:
       initContainers:
-        - name: emptyboxes-check-openhim-core-status
+        - name: covid19immunization-check-openhim-core-status
           image: busybox:1.28
           command: ['sh', '-c', 'until telnet openhim-core-service 8082; do echo OpenHIM Core API not running yet; sleep 10; done;']
       containers:
-        - name: emptyboxes-mapper-config-importer
+        - name: covid19immunization-mapper-config-importer
           image: jembi/instantohie-config-importer
           args:
             - sh
@@ -36,9 +36,9 @@ spec:
               value: root@openhim.org
           volumeMounts:
             - mountPath: /importer
-              name: emptyboxes-mapper-config-importer-config
+              name: covid19immunization-mapper-config-importer-config
       restartPolicy: OnFailure
       volumes:
-        - name: emptyboxes-mapper-config-importer-config
+        - name: covid19immunization-mapper-config-importer-config
           configMap:
-            name: emptyboxes-mapper-config-importer-configmap
+            name: covid19immunization-mapper-config-importer-configmap

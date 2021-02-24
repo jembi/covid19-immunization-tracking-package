@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: emptyboxes-mapper-deployment
+  name: covid19immunization-mapper-deployment
   labels:
-    package: emptyboxes
+    package: covid19immunization
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: emptyboxes-mapper
+      component: covid19immunization-mapper
   template:
     metadata:
       labels:
-        component: emptyboxes-mapper
+        component: covid19immunization-mapper
     spec:
       initContainers:
-        - name: emptyboxes-check-openhim-status
+        - name: covid19immunization-check-openhim-status
           image: busybox:1.28
           command: ['sh', '-c', 'until telnet openhim-core-service 8082; do echo OpenHIM not running yet; sleep 10; done;']
       containers:
-        - name: emptyboxes-mapper
+        - name: covid19immunization-mapper
           image: jembi/openhim-mediator-mapping:v2.2.2
           ports:
             - containerPort: 3003
@@ -31,7 +31,7 @@ spec:
             - name: OPENHIM_PASSWORD
               value: instant101
             - name: MONGO_URL
-              value: mongodb://mongo-0.mongo-service,mongo-1.mongo-service,mongo-2.mongo-service/emptyboxes-mediator?replicaSet=mongo-set
+              value: mongodb://mongo-0.mongo-service,mongo-1.mongo-service,mongo-2.mongo-service/covid19immunization-mediator?replicaSet=mongo-set
             - name: PARSER_LIMIT
               value: 10mb
           resources:

@@ -5,7 +5,7 @@ const http = require('http')
 const path = require('path')
 
 const MEDIATOR_HOSTNAME =
-  process.env.MEDIATOR_HOST_NAME || 'emptyboxes-mediator'
+  process.env.MEDIATOR_HOST_NAME || 'covid19immunization-mediator'
 const MEDIATOR_API_PORT = process.env.MEDIATOR_API_PORT || 3003
 
 const ENDPOINT_FILES = []
@@ -38,7 +38,7 @@ ENDPOINT_FILES.forEach(file => {
             console.log(`Endpoint data from file < ${file} > already exists`)
             return
           }
-          throw Error('emptyboxes endpoint creation failed')
+          throw Error('covid19immunization endpoint creation failed')
         }
       })
 
@@ -50,16 +50,16 @@ ENDPOINT_FILES.forEach(file => {
 
     if (res.statusCode != 201) {
       throw Error(
-        `Failed to create emptyboxes mediator endpoint: ${res.statusCode}`
+        `Failed to create covid19immunization mediator endpoint: ${res.statusCode}`
       )
     } else {
-      console.log('Successfully created emptyboxes endpoint')
+      console.log('Successfully created covid19immunization endpoint')
     }
   })
 
   req.on('error', (error) => {
     console.error(
-      'Failed to create emptyboxes mediator endpoint: ',
+      'Failed to create covid19immunization mediator endpoint: ',
       error
     )
   })

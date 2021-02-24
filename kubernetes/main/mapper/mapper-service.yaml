@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: emptyboxes-mapper-service
+  name: covid19immunization-mapper-service
   labels:
-    package: emptyboxes
+    package: covid19immunization
 spec:
   type: LoadBalancer
   selector:
-    component: emptyboxes-mapper
+    component: covid19immunization-mapper
   ports:
-    - name: emptyboxes-mapper-3003
+    - name: covid19immunization-mapper-3003
       port: 3003
       targetPort: 3003
