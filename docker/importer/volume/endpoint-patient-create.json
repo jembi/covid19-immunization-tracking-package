@@ -1,0 +1,43 @@
+{
+  "name": "FHIR - Covid-19 Patient Orchestrator",
+  "description": "Endpoint to validate the incoming Covid-19 Patient payload, resolve the Patient then create or update the resource on HAPI-FHIR",
+  "endpoint": {
+    "pattern": "/resolve-patient",
+    "endpoint": "POST"
+  },
+  "transformation": {
+    "input": "JSON",
+    "output": "JSON"
+  },
+  "inputValidation": {},
+  "inputMapping": {
+    "lookupRequests.flatArray": "data"
+  },
+  "requests": {
+    "lookup": [
+      {
+        "id": "resolvePatient",
+        "forwardExistingRequestBody": true,
+        "config": {
+          "method": "POST",
+          "url": "http://opencr:3000/fhir/Patient",
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        }
+      }
+    ],
+    "response": [
+      {
+        "id": "hapi-fhir",
+        "config": {
+          "method": "POST",
+          "url": "http://hapi-fhir:8080/fhir/Patient",
+          "headers": {
+            "Content-Type": "application/json"
+          }
+        }
+      }
+    ]
+  }
+}
