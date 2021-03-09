@@ -10,4 +10,57 @@ The input message will be sent through the OpenHIM.
 
 TODO: Channel config.
 
-TODO: Input
+### Patient Resource
+
+```json
+{
+  "resourceType": "Patient",
+  "id": "Covid19PatientExample",
+  "meta": {
+    "profile": [
+      "https://jembi.github.io/covid19-immunization-ig//StructureDefinition/covid19-patient"
+    ]
+  },
+  "text": {
+    "status": "extensions",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative</b></p><p><b>Eligible For Vaccine</b>: true</p><p><b>Patient Area Type</b>: <span title=\"Codes: \">urban</span></p><p><b>identifier</b>: id: 12345</p><p><b>name</b>: John Doe </p><p><b>telecom</b>: ph: (+27) 00 123 4567(WORK)</p><p><b>gender</b>: male</p><p><b>birthDate</b>: 1981-05-21</p></div>"
+  },
+  "extension": [
+    {
+      "url": "https://jembi.github.io/covid19-immunization-ig//StructureDefinition/eligible-for-vaccine",
+      "valueBoolean": true
+    },
+    {
+      "url": "https://jembi.github.io/covid19-immunization-ig//StructureDefinition/area-type",
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "code": "urban"
+          }
+        ]
+      }
+    }
+  ],
+  "identifier": [
+    {
+      "system": "https://jembi.github.io/covid19-immunization-ig/patient-id",
+      "value": "12345"
+    }
+  ],
+  "name": [
+    {
+      "family": "Doe",
+      "given": ["John"]
+    }
+  ],
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "(+27) 00 123 4567",
+      "use": "work"
+    }
+  ],
+  "gender": "male",
+  "birthDate": "1981-05-21"
+}
+```
