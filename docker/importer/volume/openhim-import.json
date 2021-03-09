@@ -42,7 +42,7 @@
       "requestBody": true,
       "responseBody": true,
       "rewriteUrlsConfig": [],
-      "name": "Patient Registration for Coivd19 Immunization",
+      "name": "Patient Registration for Covid19 Immunization",
       "urlPattern": "^/patient-registration$",
       "matchContentRegex": null,
       "matchContentXpath": null,
