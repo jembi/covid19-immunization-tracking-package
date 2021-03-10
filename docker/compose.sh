@@ -6,6 +6,10 @@ composeFilePath=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 
 if [ "$1" == "init" ]; then
     docker-compose -p instant -f "$composeFilePath"/docker-compose.yml -f "$composeFilePath"/docker-compose.dev.yml -f "$composeFilePath"/importer/docker-compose.config.yml up -d
+
+    # configure OpenCR
+    docker cp "$composeFilePath"/importer/volume/config_instant.json opencr:/src/server/config/config_instant.json
+    docker restart opencr
 elif [ "$1" == "up" ]; then
     docker-compose -p instant -f "$composeFilePath"/docker-compose.yml -f "$composeFilePath"/docker-compose.dev.yml up -d
 elif [ "$1" == "down" ]; then
