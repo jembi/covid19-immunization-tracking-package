@@ -2,7 +2,7 @@
   "name": "FHIR - Covid-19 Patient Orchestrator",
   "description": "Endpoint to validate the incoming Covid-19 Patient payload, resolve the Patient then create or update the resource on HAPI-FHIR",
   "endpoint": {
-    "pattern": "/resolve-patient",
+    "pattern": "/patient-registration",
     "endpoint": "POST"
   },
   "transformation": {
