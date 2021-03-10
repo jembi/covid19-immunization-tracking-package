@@ -48,7 +48,7 @@
   },
   "constants": {
     "opencr":{
-      "value": "testUID",
+      "value": "Patient/testUID",
       "system": "http://instantopenhie.org/opencr"
     }
   }
