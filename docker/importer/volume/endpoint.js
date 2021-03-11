@@ -9,7 +9,8 @@ const MEDIATOR_HOSTNAME =
 const MEDIATOR_API_PORT = process.env.MEDIATOR_API_PORT || 3003
 
 const ENDPOINT_FILES = [
-  'endpoint-patient-create.json'
+  'endpoint-patient-create.json',
+  'endpoint-patient-update.json'
 ]
 
 ENDPOINT_FILES.forEach(file => {
