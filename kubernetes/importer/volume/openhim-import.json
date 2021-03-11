@@ -1,52 +1,118 @@
 {
-  "Users": [
+  "Channels": [
     {
-      "groups": [
-        "admin"
+      "methods": [
+        "GET",
+        "POST",
+        "DELETE",
+        "PUT"
       ],
-      "firstname": "Super",
-      "surname": "User",
-      "email": "root@openhim.org",
-      "passwordAlgorithm": "sha512",
-      "passwordHash": "ea3824f17cf1379eb118a36bc7c8cf0f45712e2af7748567fca5313dec6fa66d61064e82a5e5cb88e998486ee3c7d0dac235bbeda8c341d6edc1c77406be2ab6",
-      "passwordSalt": "d4f622c0404f09bd959bfb263efa3452",
-      "expiry": null,
-      "locked": false,
-      "token": null,
-      "tokenType": null
-    }
-  ],
-  "Clients": [
-    {
-      "roles": [
+      "type": "http",
+      "allow": [
         "instant"
       ],
-      "customTokenID": "test",
-      "clientID": "test",
-      "name": "Test Client"
-    }
-  ],
-  "Mediators": [
-    {
-      "urn": "covid19-immunization-tracking-mediator",
-      "version": "2.2.2",
-      "name": "Mapping Mediator",
-      "description": "Generic OpenHIM Mapping Mediator",
-      "endpoints": [
+      "whitelist": [],
+      "authType": "private",
+      "matchContentTypes": [],
+      "properties": [],
+      "txViewAcl": [],
+      "txViewFullAcl": [],
+      "txRerunAcl": [],
+      "status": "enabled",
+      "rewriteUrls": false,
+      "addAutoRewriteRules": true,
+      "autoRetryEnabled": false,
+      "autoRetryPeriodMinutes": 60,
+      "routes": [
         {
           "type": "http",
           "status": "enabled",
           "forwardAuthHeader": false,
-          "name": "Generic Mapping Mediator",
-          "host": "localhost",
-          "port": 3003
+          "name": "Hapi Fhir",
+          "secured": false,
+          "host": "hapi-fhir",
+          "port": 8080,
+          "path": "/fhir/Immunization",
+          "pathTransform": "",
+          "primary": true,
+          "username": "",
+          "password": ""
         }
       ],
-      "defaultChannelConfig": [],
-      "configDefs": [],
-      "_lastHeartbeat": "2021-02-24T12:55:39.663Z",
-      "_uptime": 300.864322424
+      "requestBody": true,
+      "responseBody": true,
+      "rewriteUrlsConfig": [],
+      "name": "Patient Covid19 Immunization",
+      "urlPattern": "^/immunization$",
+      "matchContentRegex": null,
+      "matchContentXpath": null,
+      "matchContentValue": null,
+      "matchContentJson": null,
+      "pollingSchedule": null,
+      "tcpHost": null,
+      "tcpPort": null,
+      "updatedBy": {
+        "id": "604235eb859eec0013a19aaa",
+        "name": "Super User"
+      },
+      "alerts": []
+    },
+    {
+      "methods": [
+        "GET",
+        "POST",
+        "DELETE",
+        "PUT"
+      ],
+      "type": "http",
+      "allow": [
+        "instant"
+      ],
+      "whitelist": [],
+      "authType": "private",
+      "matchContentTypes": [],
+      "properties": [],
+      "txViewAcl": [],
+      "txViewFullAcl": [],
+      "txRerunAcl": [],
+      "status": "enabled",
+      "rewriteUrls": false,
+      "addAutoRewriteRules": true,
+      "autoRetryEnabled": false,
+      "autoRetryPeriodMinutes": 60,
+      "routes": [
+        {
+          "type": "http",
+          "status": "enabled",
+          "forwardAuthHeader": false,
+          "name": "Hapi Fhir",
+          "secured": false,
+          "host": "hapi-fhir",
+          "port": 8080,
+          "path": "/fhir/Patient",
+          "pathTransform": "",
+          "primary": true,
+          "username": "",
+          "password": ""
+        }
+      ],
+      "requestBody": true,
+      "responseBody": true,
+      "rewriteUrlsConfig": [],
+      "name": "Patient Search",
+      "urlPattern": "^/patient-search.*$",
+      "matchContentRegex": null,
+      "matchContentXpath": null,
+      "matchContentValue": null,
+      "matchContentJson": null,
+      "pollingSchedule": null,
+      "tcpHost": null,
+      "tcpPort": null,
+      "updatedBy": {
+        "id": "604235eb859eec0013a19aaa",
+        "name": "Super User"
+      },
+      "alerts": []
     }
-  ],
-  "ContactGroups": []
+  ]
 }
