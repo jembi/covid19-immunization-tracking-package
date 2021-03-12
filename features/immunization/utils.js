@@ -11,7 +11,7 @@ const {
 let authorizationError
 
 const immunization = JSON.parse(
-  fs.readFileSync(`${__dirname}/payloads/immunization.json`, 'utf8')
+  fs.readFileSync(`${__dirname}/payload/immunization.json`, 'utf8')
 )
 
 exports.verifyOpenhimIsRunning = verifyOpenhimIsRunning
