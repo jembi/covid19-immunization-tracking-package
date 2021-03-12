@@ -1,0 +1,223 @@
+{
+  "name": "FHIR - Covid-19 Update Patient Orchestrator",
+  "description": "Endpoint to validate the incoming Covid-19 Patient payload, resolve the Patient then update the resource on HAPI-FHIR",
+  "endpoint": {
+    "pattern": "/patient-registration/:fhirId",
+    "endpoint": "PUT"
+  },
+  "transformation": {
+    "input": "JSON",
+    "output": "JSON"
+  },
+  "inputValidation": {
+    "type": "object",
+    "properties": {
+      "requestBody": {
+        "type": "object",
+        "properties": {
+          "resourceType": {
+            "type": "string",
+            "enum": [
+              "Patient"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "pattern": "[A-Za-z0-9\\-\\.]{1,64}"
+          },
+          "extension": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "format": "url"
+                },
+                "valueBoolean": {
+                  "type": "boolean"
+                },
+                "valueCodeableConcept": {
+                  "type": "object",
+                  "properties": {
+                    "coding": {
+                      "type": "array",
+                      "maxItems": 1,
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "code": {
+                            "type": "string",
+                            "enum": [
+                              "urban",
+                              "rural"
+                            ],
+                            "errorMessage": "Allowed values: ['urban', 'rural']"
+                          }
+                        },
+                        "required": ["code"]
+                      }
+                    }
+                  },
+                  "required": ["coding"]
+                }
+              },
+              "required": ["url"]
+            }
+          },
+          "identifier": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "system": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "system",
+                "value"
+              ]
+            }
+          },
+          "name": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "family": {
+                  "type": "string"
+                },
+                "given": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "telecom": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "properties": {
+                "system": {
+                  "type": "string",
+                  "enum": [
+                    "phone",
+                    "fax",
+                    "email",
+                    "pager",
+                    "url",
+                    "sms",
+                    "other"
+                  ],
+                  "errorMessage": "Allowed values: ['phone','fax','email','pager','url','sms','other']"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "use": {
+                  "type": "string",
+                  "enum": [
+                    "home",
+                    "work",
+                    "temp",
+                    "old",
+                    "mobile"
+                  ],
+                  "errorMessage": "Allowed values: ['home','work','temp','old','mobile']"
+                }
+              }
+            }
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "female",
+              "male"
+            ],
+            "errorMessage": "Allowed values: ['female', 'male']"
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date"
+          }
+        },
+        "required": [
+          "resourceType",
+          "id",
+          "extension",
+          "identifier",
+          "name",
+          "telecom",
+          "gender",
+          "birthDate"
+        ]
+      }
+    },
+    "required": [
+      "requestBody"
+    ]
+  },
+  "inputMapping": {
+    "requestBody": {
+      "transform": {
+        "function": "passThroughObject"
+      }
+    },
+    "constants.opencr": "identifier[]+"
+  },
+  "requests": {
+    "lookup": [
+      {
+        "id": "resolvePatient",
+        "forwardExistingRequestBody": true,
+        "config": {
+          "method": "POST",
+          "url": "http://opencr:3000/fhir/Patient",
+          "headers": {
+            "Content-Type": "application/json",
+            "x-openhim-clientid": "test"
+          }
+        }
+      }
+    ],
+    "response": [
+      {
+        "id": "hapi-fhir",
+        "config": {
+          "method": "PUT",
+          "url": "http://hapi-fhir:8080/fhir/Patient/:fhirId",
+          "headers": {
+            "Content-Type": "application/json"
+          },
+          "params": {
+            "url": {
+              "fhirId": {
+                "path": "urlParams.fhirId"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "constants": {
+    "opencr": {
+      "value": "Patient/testUID",
+      "system": "http://instantopenhie.org/opencr"
+    }
+  }
+}
