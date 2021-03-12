@@ -8,9 +8,16 @@ To enable this package within the Instant OpenHIE, mount this project directory 
 
 The input message will be sent through the OpenHIM.
 
-TODO: Channel config.
+The following channels are set up:
+
+- GET  <http://localhost:5001/patient-search>
+- POST <http://localhost:5001/patient-registration>
+- PUT  <http://localhost:5001/patient-registration/{FHIR_ID}>
+- POST <http://localhost:5001/immunization>
 
 ### Patient Resource
+
+To **create** a patient, send through the following payload to `/patient-registration`
 
 ```json
 {
@@ -64,3 +71,8 @@ TODO: Channel config.
   "birthDate": "1981-05-21"
 }
 ```
+
+You should receive the created form of the Patient resource in HAPI FHIR - notice the Resource now has an `id` field.
+
+To **update** a patient, send through the payload above to `/patient-registration/{FHIR_ID}` but add the field `id` to the object root.
+Also substitute in the `id` into the Request path in the `FHIR_ID` placeholder position.
