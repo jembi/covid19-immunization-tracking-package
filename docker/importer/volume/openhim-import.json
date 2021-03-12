@@ -59,10 +59,7 @@
     },
     {
       "methods": [
-        "GET",
-        "POST",
-        "DELETE",
-        "PUT"
+        "GET"
       ],
       "type": "http",
       "allow": [
