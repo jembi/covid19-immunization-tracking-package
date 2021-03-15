@@ -8,7 +8,7 @@ const {
   verifyOpenhimIsRunning
 } = require('../utils')
 
-let authorizationError, immunizationId
+let authorizationError
 
 const immunization = JSON.parse(
   fs.readFileSync(`${__dirname}/payload/immunization.json`, 'utf8')
