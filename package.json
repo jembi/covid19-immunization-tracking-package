@@ -6,7 +6,7 @@
     "lint": "eslint ./features/*/*.js",
     "lint:fix": "eslint ./features/*/*.js --fix",
     "test": "env-cmd -f ./docker/.env.local cucumber-js -f progress-bar ./features/",
-    "test:remote": "env-cmd -f ./ansible/.env.remote cucumber-js -f progress-bar ./features/"
+    "test:remote": "env-cmd -f ./kubernetes/.env.remote cucumber-js -f progress-bar ./features/"
   },
   "repository": {
     "type": "git",
