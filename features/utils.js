@@ -16,9 +16,9 @@ const deleteResource = (id, resourceType) => {
   })
 }
 
-const retrieveResource = (id, resourceType) => {
+const retrieveResource = path => {
   return axios({
-    url: `${OPENHIM_PROTOCOL}://${OPENHIM_API_HOSTNAME}:${OPENHIM_TRANSACTION_API_PORT}/fhir/${resourceType}/${id}`,
+    url: `${OPENHIM_PROTOCOL}://${OPENHIM_API_HOSTNAME}:${OPENHIM_TRANSACTION_API_PORT}/fhir/${path}`,
     method: 'GET'
   })
 }
@@ -55,16 +55,19 @@ exports.sendRequest = async (data, path, method = 'POST', token = CUSTOM_TOKEN_I
   return response
 }
 
-exports.verifyResourceExistsAndCleanup = async (id, resourceType) => {
-  const retrieveResult = await retrieveResource(id, resourceType)
+exports.verifyResourceExistsAndCleanup = async path => {
+  const retrievedResult = await retrieveResource(path)
 
-  if (retrieveResult.status != 200 || !retrieveResult.data.total) {
-    throw Error(`${resourceType} with id ${id} does not exist`)
+  if (retrievedResult.status != 200 || !retrievedResult.data.total) {
+    throw Error(`Resource on path ${path} does not exist`)
   }
 
-  const deleteResult = await deleteResource(id, resourceType)
+  const deleteResult = await deleteResource(
+    retrievedResult.data.entry[0]._id,
+    retrievedResult.data.entry[0].resourceType
+  )
 
   if (deleteResult.status != 200) {
-    throw Error(`${resourceType} with id ${id} could not be deleted`)
+    throw Error(`Resource on path ${path} could not be deleted`)
   }
 }
