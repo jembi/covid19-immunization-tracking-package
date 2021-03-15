@@ -34,6 +34,22 @@ services:
         target: /instant
     # This command will only attempt to import the covid19immunization-mediator config when the uptime endpoint responds with 200
     command: sh -c "wait-on -t 60000 http-get://covid19-immunization-mediator:3003/uptime && sleep 1 && node /instant/covid19-immunization-tracking-package/docker/importer/volume/endpoint.js"
+  
+  hapi-fhir-config-importer:
+    container_name: hapi-fhir-config-importer
+    image: jembi/instantohie-config-importer
+    restart: on-failure
+    environment:
+      HAPI_FHIR_PATH: '/fhir'
+      HAPI_FHIR_HOSTNAME: 'hapi-fhir'
+      HAPI_FHIR_PORT: 8080
+      COVID19_IG_URL: 'https://jembi.github.io/covid19-immunization-ig'
+      COVID19_IG_PROTOCOL: 'http:'
+    volumes:
+      - type: volume
+        source: instant
+        target: /instant
+    command: sh -c "wait-on -t 60000 http-get://hapi-fhir:8080 && sleep 1 && node /instant/covid19-immunization-tracking-package/docker/importer/volume/fhirConfig.js"
 
 volumes:
   instant:
