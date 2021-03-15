@@ -110,6 +110,63 @@
         "name": "Super User"
       },
       "alerts": []
+    },
+    {
+      "methods": [
+        "GET",
+        "POST",
+        "DELETE",
+        "PUT"
+      ],
+      "type": "http",
+      "allow": [
+        "instant"
+      ],
+      "whitelist": [],
+      "authType": "private",
+      "matchContentTypes": [],
+      "properties": [],
+      "txViewAcl": [],
+      "txViewFullAcl": [],
+      "txRerunAcl": [],
+      "status": "enabled",
+      "rewriteUrls": false,
+      "addAutoRewriteRules": true,
+      "autoRetryEnabled": false,
+      "autoRetryPeriodMinutes": 60,
+      "routes": [
+        {
+          "type": "http",
+          "status": "enabled",
+          "forwardAuthHeader": false,
+          "name": "Generic Mapping Mediator",
+          "secured": false,
+          "host": "covid19-immunization-mediator",
+          "port": 3003,
+          "path": "",
+          "pathTransform": "",
+          "primary": true,
+          "username": "",
+          "password": ""
+        }
+      ],
+      "requestBody": true,
+      "responseBody": true,
+      "rewriteUrlsConfig": [],
+      "name": "Patient Registration for Covid19 Immunization",
+      "urlPattern": "^/patient-registration.*$",
+      "matchContentRegex": null,
+      "matchContentXpath": null,
+      "matchContentValue": null,
+      "matchContentJson": null,
+      "pollingSchedule": null,
+      "tcpHost": null,
+      "tcpPort": null,
+      "updatedBy": {
+        "id": "604235eb859eec0013a19aaa",
+        "name": "Super User"
+      },
+      "alerts": []
     }
   ]
 }

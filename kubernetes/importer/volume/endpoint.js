@@ -8,7 +8,10 @@ const MEDIATOR_HOSTNAME =
   process.env.MEDIATOR_HOST_NAME || 'covid19-immunization-mediator'
 const MEDIATOR_API_PORT = process.env.MEDIATOR_API_PORT || 3003
 
-const ENDPOINT_FILES = []
+const ENDPOINT_FILES = [
+  'endpoint-patient-create.json',
+  'endpoint-patient-update.json'
+]
 
 ENDPOINT_FILES.forEach(file => {
   const data = fs.readFileSync(path.resolve(__dirname, file))
