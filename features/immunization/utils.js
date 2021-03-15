@@ -8,7 +8,7 @@ const {
   verifyOpenhimIsRunning
 } = require('../utils')
 
-let authorizationError
+let authorizationError, immunizationId
 
 const immunization = JSON.parse(
   fs.readFileSync(`${__dirname}/payload/immunization.json`, 'utf8')
@@ -17,13 +17,13 @@ const immunization = JSON.parse(
 exports.verifyOpenhimIsRunning = verifyOpenhimIsRunning
 
 exports.sendImmunizationAuthorized = async () => {
-  const result = await sendRequest(immunization, 'Immunization')
-  immunization.id = result.id
+  const response = await sendRequest(immunization, 'immunization')
+  immunizationId = response.data._id
 }
 
 exports.sendImmunizationUnAuthorized = async () => {
   try {
-    await sendRequest(immunization, 'Immunization', 'Invalid token')
+    await sendRequest(immunization, 'immunization', 'POST', 'Invalid token')
   } catch (err) {
     if (err.response.status == 401) {
       authorizationError = true
@@ -36,5 +36,5 @@ exports.verifyAuthorizationError = () => {
 }
 
 exports.verifyImmunizationExistsAndCleanup = async () => {
-  await verifyResourceExistsAndCleanup(immunization.id, 'Immunization')
+  await verifyResourceExistsAndCleanup(immunizationId, 'Immunization')
 }
