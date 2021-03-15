@@ -17,8 +17,7 @@ const patient = JSON.parse(
 exports.verifyOpenhimIsRunning = verifyOpenhimIsRunning
 
 exports.ensurePatientExists = async () => {
-  const response = await sendRequest(patient, 'patient-registration')
-  patientId = response.data._id
+  await sendRequest(patient, 'patient-registration')
 }
 
 exports.getPatientUnAuthorized = async () => {
@@ -30,14 +29,14 @@ exports.getPatientUnAuthorized = async () => {
 }
 
 exports.getPatientAuthorized = async () => {
-  const response = await sendRequest('', `patient-search?_id=${patientId}`, 'GET')
+  const response = await sendRequest('', `patient-search?given:exact=${patient.name[0].given[0]}`, 'GET')
   retrievedPatient = response.data
 }
 
 exports.verifyPatientRetrievalAndCleanUp = () => {
   if (
     !retrievedPatient ||
-    retrievedPatient.patient.reference != patient.patient.reference
+    retrievedPatient.name[0].given[0] != patient.name[0].given[0]
   ) throw Error('Verification of patient retrieval has failed')
 
   await deleteResource(patientId, 'Patient')
