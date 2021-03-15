@@ -1,42 +1,51 @@
 {
-  "resourceType" : "Immunization",
-  "id" : "Covid19ImmunizationExample",
-  "meta" : {
-    "profile" : [
-      "https://jembi.github.io/covid19-immunization-ig//StructureDefinition/covid19-immunization"
-    ]
+  "resourceType": "Patient",
+  "meta": {
+     "profile": [
+        "https://jembi.github.io/covid19-immunization-ig//StructureDefinition/covid19-patient"
+     ]
   },
-  "text" : {
-    "status" : "extensions",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative</b></p><p><b>Last Dose</b>: false</p><p><b>Dose Given</b>: true</p><p><b>status</b>: completed</p><p><b>vaccineCode</b>: <span title=\"Codes: {http://snomed.info/sct 840534001}\">COVID-19 vaccination</span></p><p><b>patient</b>: <a href=\"Covid19Patient/example\">Covid19Patient/example</a></p><p><b>occurrence</b>: Jan 26, 2021, 10:26:54 AM</p><h3>ProtocolApplieds</h3><table class=\"grid\"><tr><td>-</td><td><b>DoseNumber[x]</b></td></tr><tr><td>*</td><td>100</td></tr></table></div>"
+  "text": {
+     "status": "extensions",
+     "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative<\/b><\/p><p><b>Eligible For Vaccine<\/b>: true<\/p><p><b>Patient Area Type<\/b>: <span title=\"Codes: \">urban<\/span><\/p><p><b>identifier<\/b>: id: 12345<\/p><p><b>name<\/b>: John Doe <\/p><p><b>telecom<\/b>: ph: (+27) 00 123 4567(WORK)<\/p><p><b>gender<\/b>: male<\/p><p><b>birthDate<\/b>: 1981-05-21<\/p><\/div>"
   },
-  "extension" : [
-    {
-      "url" : "https://jembi.github.io/covid19-immunization-ig//StructureDefinition/last-dose",
-      "valueBoolean" : false
-    },
-    {
-      "url" : "https://jembi.github.io/covid19-immunization-ig//StructureDefinition/dose-given",
-      "valueBoolean" : true
-    }
+  "extension": [
+     {
+        "url": "https://jembi.github.io/covid19-immunization-ig//StructureDefinition/eligible-for-vaccine",
+        "valueBoolean": true
+     },
+     {
+        "url": "https://jembi.github.io/covid19-immunization-ig//StructureDefinition/area-type",
+        "valueCodeableConcept": {
+           "coding": [
+              {
+                 "code": "urban"
+              }
+           ]
+        }
+     }
   ],
-  "status" : "completed",
-  "vaccineCode" : {
-    "coding" : [
-      {
-        "system" : "http://snomed.info/sct",
-        "code" : "840534001",
-        "display" : "COVID-19 vaccination"
-      }
-    ]
-  },
-  "patient" : {
-    "reference" : "Covid19Patient/example"
-  },
-  "occurrenceDateTime" : "2021-01-26T10:26:54.421Z",
-  "protocolApplied" : [
-    {
-      "doseNumberPositiveInt" : 100
-    }
-  ]
+  "identifier": [
+     {
+        "system": "https://jembi.github.io/covid19-immunization-ig/patient-id",
+        "value": "1234567"
+     }
+  ],
+  "name": [
+     {
+        "family": "Example1234",
+        "given": [
+           "example421313"
+        ]
+     }
+  ],
+  "telecom": [
+     {
+        "system": "phone",
+        "value": "(+27) 00 123 4568",
+        "use": "work"
+     }
+  ],
+  "gender": "female",
+  "birthDate": "1981-05-21"
 }
