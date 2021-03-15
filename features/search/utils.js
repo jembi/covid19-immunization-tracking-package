@@ -8,7 +8,7 @@ const {
   verifyOpenhimIsRunning
 } = require('../utils')
 
-let authorizationError, retrievedPatient, patientId
+let authorizationError, retrievedPatient
 
 const patient = JSON.parse(
   fs.readFileSync(`${__dirname}/payload/patient.json`, 'utf8')
@@ -30,7 +30,7 @@ exports.getPatientUnAuthorized = async () => {
 
 exports.getPatientAuthorized = async () => {
   const response = await sendRequest('', `patient-search?given:exact=${patient.name[0].given[0]}`, 'GET')
-  retrievedPatient = response.data
+  retrievedPatient = response.data.entry[0]
 }
 
 exports.verifyPatientRetrievalAndCleanUp = () => {
@@ -39,5 +39,5 @@ exports.verifyPatientRetrievalAndCleanUp = () => {
     retrievedPatient.name[0].given[0] != patient.name[0].given[0]
   ) throw Error('Verification of patient retrieval has failed')
 
-  await deleteResource(patientId, 'Patient')
+  await deleteResource(retrievedPatient._id, 'Patient')
 }
