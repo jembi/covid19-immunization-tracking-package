@@ -17,24 +17,12 @@ Given(
   verifyOpenhimIsRunning
 )
 
-Given(
-  'the patient exists',
-  ensurePatientExists
-)
+Given('the patient exists', ensurePatientExists)
 
-When(
-  'an authorized client requests a patient',
-  getPatientAuthorized
-)
+When('an authorized client requests a patient', getPatientAuthorized)
 
-When(
-  'an unauthorized client requests a patient',
-  getPatientUnAuthorized
-)
+When('an unauthorized client requests a patient', getPatientUnAuthorized)
 
 Then('there should be an authorization error', verifyAuthorizationError)
 
-Then(
-  'the patient should be retrieved',
-  verifyPatientRetrievalAndCleanup
-)
+Then('the patient should be retrieved', verifyPatientRetrievalAndCleanup)

@@ -35,5 +35,7 @@ exports.verifyAuthorizationError = () => {
 }
 
 exports.verifyImmunizationExistsAndCleanup = async () => {
-  await verifyResourceExistsAndCleanup(`Immunization?patient=${immunization.patient.reference}`)
+  await verifyResourceExistsAndCleanup(
+    `Immunization?patient=${immunization.patient.reference}`
+  )
 }

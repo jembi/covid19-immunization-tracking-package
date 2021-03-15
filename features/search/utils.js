@@ -29,15 +29,24 @@ exports.getPatientUnAuthorized = async () => {
 }
 
 exports.getPatientAuthorized = async () => {
-  const response = await sendRequest('', `patient-search?given:exact=${patient.name[0].given[0]}`, 'GET')
+  const response = await sendRequest(
+    '',
+    `patient-search?given:exact=${patient.name[0].given[0]}`,
+    'GET'
+  )
   retrievedPatient = response.data.entry[0]
 }
 
-exports.verifyPatientRetrievalAndCleanUp = () => {
+exports.verifyPatientRetrievalAndCleanUp = async () => {
   if (
     !retrievedPatient ||
     retrievedPatient.name[0].given[0] != patient.name[0].given[0]
-  ) throw Error('Verification of patient retrieval has failed')
+  )
+    throw Error('Verification of patient retrieval has failed')
 
   await deleteResource(retrievedPatient._id, 'Patient')
+}
+
+exports.verifyAuthorizationError = () => {
+  if (!authorizationError) throw Error('Could not verify authorization error')
 }
