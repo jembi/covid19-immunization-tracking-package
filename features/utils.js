@@ -23,6 +23,8 @@ const retrieveResource = (id, resourceType) => {
   })
 }
 
+exports.deleteResource = deleteResource
+
 exports.verifyOpenhimIsRunning = async () => {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0
   const response = await axios({
@@ -38,10 +40,10 @@ exports.verifyOpenhimIsRunning = async () => {
   ) throw Error('Mediators are currently down')
 }
 
-exports.sendRequest = async (data, path, token = CUSTOM_TOKEN_ID) => {
+exports.sendRequest = async (data, path, method = 'POST', token = CUSTOM_TOKEN_ID) => {
   const response = await axios({
     url: `${OPENHIM_PROTOCOL}://${OPENHIM_API_HOSTNAME}:${OPENHIM_TRANSACTION_API_PORT}/${path}`,
-    method: 'POST',
+    method: method,
     headers: {
       "Content-Type": 'application/json',
       Authorization: `Custom ${token}`
@@ -50,6 +52,7 @@ exports.sendRequest = async (data, path, token = CUSTOM_TOKEN_ID) => {
   })
 
   if (response.status != 202) throw Error(`Sending of request on path ${path} failed`)
+  return response
 }
 
 exports.verifyResourceExistsAndCleanup = async (id, resourceType) => {
