@@ -76,3 +76,52 @@ You should receive the created form of the Patient resource in HAPI FHIR - notic
 
 To **update** a patient, send through the payload above to `/patient-registration/{FHIR_ID}` but add the field `id` to the object root.
 Also substitute in the `id` into the Request path in the `FHIR_ID` placeholder position.
+
+### Immunization Resource
+
+To **create** an immunization, send through the following payload to `/immunization`
+
+```json
+{
+  "resourceType" : "Immunization",
+  "id" : "Covid19ImmunizationExample",
+  "meta" : {
+    "profile" : [
+      "https://jembi.github.io/covid19-immunization-ig//StructureDefinition/covid19-immunization"
+    ]
+  },
+  "text" : {
+    "status" : "extensions",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative</b></p><p><b>Last Dose</b>: false</p><p><b>Dose Given</b>: true</p><p><b>status</b>: completed</p><p><b>vaccineCode</b>: <span title=\"Codes: {http://snomed.info/sct 840534001}\">COVID-19 vaccination</span></p><p><b>patient</b>: <a href=\"Covid19Patient/example\">Covid19Patient/example</a></p><p><b>occurrence</b>: Jan 26, 2021, 10:26:54 AM</p><h3>ProtocolApplieds</h3><table class=\"grid\"><tr><td>-</td><td><b>DoseNumber[x]</b></td></tr><tr><td>*</td><td>100</td></tr></table></div>"
+  },
+  "extension" : [
+    {
+      "url" : "https://jembi.github.io/covid19-immunization-ig//StructureDefinition/last-dose",
+      "valueBoolean" : false
+    },
+    {
+      "url" : "https://jembi.github.io/covid19-immunization-ig//StructureDefinition/dose-given",
+      "valueBoolean" : true
+    }
+  ],
+  "status" : "completed",
+  "vaccineCode" : {
+    "coding" : [
+      {
+        "system" : "http://snomed.info/sct",
+        "code" : "840534001",
+        "display" : "COVID-19 vaccination"
+      }
+    ]
+  },
+  "patient" : {
+    "reference" : "Covid19Patient/example"
+  },
+  "occurrenceDateTime" : "2021-01-26T10:26:54.421Z",
+  "protocolApplied" : [
+    {
+      "doseNumberPositiveInt" : 100
+    }
+  ]
+}
+```
