@@ -17,8 +17,7 @@ const immunization = JSON.parse(
 exports.verifyOpenhimIsRunning = verifyOpenhimIsRunning
 
 exports.sendImmunizationAuthorized = async () => {
-  const response = await sendRequest(immunization, 'immunization')
-  immunizationId = response.data._id
+  await sendRequest(immunization, 'immunization')
 }
 
 exports.sendImmunizationUnAuthorized = async () => {
