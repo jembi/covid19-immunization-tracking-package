@@ -17,7 +17,8 @@ const patient = JSON.parse(
 exports.verifyOpenhimIsRunning = verifyOpenhimIsRunning
 
 exports.sendRegistrationAuthorized = async () => {
-  await sendRequest(patient, 'patient-registration')
+  const result = await sendRequest(patient, 'patient-registration')
+  patientId = result.data.id
 }
 
 exports.sendRegistrationUnAuthorized = async () => {
@@ -33,7 +34,5 @@ exports.verifyAuthorizationError = () => {
 }
 
 exports.verifyRegistrationExistsAndCleanup = async () => {
-  await verifyResourceExistsAndCleanup(
-    `Patient?given=${patient.name[0].given[0]}`
-  )
+  await verifyResourceExistsAndCleanup(`Patient?_id=${patientId}`)
 }
