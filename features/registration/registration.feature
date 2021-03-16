@@ -4,5 +4,5 @@ Feature: Patient-registration
 
     Scenario: An authorized client sends a registration
       Given that the openhim and mediators are up and running
-      When registration is sent through by an authorized client
+      When a registration is sent through by an authorized client
       Then the registration should exist in Hapi Fhir

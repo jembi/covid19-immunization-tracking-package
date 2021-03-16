@@ -8,7 +8,7 @@ const {
   verifyResourceExistsAndCleanup
 } = require('../utils')
 
-let authorizationError
+let authorizationError, patientId
 
 const patient = JSON.parse(
   fs.readFileSync(`${__dirname}/payload/patient.json`, 'utf8')

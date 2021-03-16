@@ -4,5 +4,5 @@ Feature: Patient-authorization
 
     Scenario: An unauthorized client sends a registration
       Given that the openhim and mediators are up and running
-      When registration is sent through by an unauthorized client
-      Then there should be an authorization error
+      When a registration is sent through by an unauthorized client
+      Then there should be a registration authorization error
