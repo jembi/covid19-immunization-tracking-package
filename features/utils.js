@@ -61,7 +61,11 @@ exports.sendRequest = async (
     data: data
   })
 
-  if (response.status != 202)
+  if (
+    response.status != 200 &&
+    response.status != 201 &&
+    response.status != 202
+  )
     throw Error(`Sending of request on path ${path} failed`)
   return response
 }
@@ -74,8 +78,8 @@ exports.verifyResourceExistsAndCleanup = async path => {
   }
 
   const deleteResult = await deleteResource(
-    retrievedResult.data.entry[0]._id,
-    retrievedResult.data.entry[0].resourceType
+    retrievedResult.data.entry[0].resource.id,
+    retrievedResult.data.entry[0].resource.resourceType
   )
 
   if (deleteResult.status != 200) {
