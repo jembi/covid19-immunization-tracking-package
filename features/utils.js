@@ -13,14 +13,20 @@ const CUSTOM_TOKEN_ID =
 const deleteResource = (id, resourceType) => {
   return axios({
     url: `${OPENHIM_PROTOCOL}://${OPENHIM_API_HOSTNAME}:${OPENHIM_TRANSACTION_API_PORT}/fhir/${resourceType}/${id}`,
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: {
+      Authorization: `Custom ${CUSTOM_TOKEN_ID}`
+    }
   })
 }
 
 const retrieveResource = path => {
   return axios({
     url: `${OPENHIM_PROTOCOL}://${OPENHIM_API_HOSTNAME}:${OPENHIM_TRANSACTION_API_PORT}/fhir/${path}`,
-    method: 'GET'
+    method: 'GET',
+    headers: {
+      Authorization: `Custom ${CUSTOM_TOKEN_ID}`
+    }
   })
 }
 
