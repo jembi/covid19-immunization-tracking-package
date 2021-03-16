@@ -31,7 +31,7 @@
     ]
   },
   "patient" : {
-    "reference" : "Covid19Patient/example13141423"
+    "reference" : "Patient/example13141423"
   },
   "occurrenceDateTime" : "2021-01-26T10:26:54.421Z",
   "protocolApplied" : [

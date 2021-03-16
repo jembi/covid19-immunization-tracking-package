@@ -6,6 +6,7 @@ const {
   sendImmunizationAuthorized,
   sendImmunizationUnAuthorized,
   verifyAuthorizationError,
+  ensurePatientExists,
   verifyImmunizationExistsAndCleanup
 } = require('./utils')
 
@@ -16,17 +17,22 @@ Given(
   verifyOpenhimIsRunning
 )
 
+Given('the patient for the immunization exists', ensurePatientExists)
+
 When(
-  'immunization is sent through by an authorized client',
+  'an immunization is sent through by an authorized client',
   sendImmunizationAuthorized
 )
 
 When(
-  'immunization is sent through by an unauthorized client',
+  'an immunization is sent through by an unauthorized client',
   sendImmunizationUnAuthorized
 )
 
-Then('there should be an authorization error', verifyAuthorizationError)
+Then(
+  'there should be an immunization authorization error',
+  verifyAuthorizationError
+)
 
 Then(
   'the immunization should exist in Hapi Fhir',
