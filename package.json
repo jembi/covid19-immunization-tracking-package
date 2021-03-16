@@ -20,6 +20,7 @@
   "homepage": "https://github.com/jembi/covid19-immunization-tracking-package#readme",
   "dependencies": {
     "@cucumber/cucumber": "^7.0.0",
+    "adm-zip": "^0.5.4",
     "axios": "^0.21.1",
     "env-cmd": "^10.1.0"
   },
