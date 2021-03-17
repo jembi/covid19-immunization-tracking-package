@@ -22,7 +22,7 @@ spec:
           args:
             - sh
             - -c
-            - wait-on -t 60000 https-get://hapi-fhir-server-service:8080 && node fhirConfig.js
+            - wait-on -t 60000 http-get://hapi-fhir-server-service:8080 && npm install && node fhirConfig.js
           env:
             - name: HAPI_FHIR_PATH
               value: '/fhir'
@@ -34,6 +34,8 @@ spec:
               value: 'https://jembi.github.io/covid19-immunization-ig'
             - name: COVID19_IG_PROTOCOL
               value: 'http:'
+            - name: NODE_ENV
+              value: 'production'
           volumeMounts:
             - mountPath: /importer
               name: covid19-immunization-hapi-fhir-config-importer-config
