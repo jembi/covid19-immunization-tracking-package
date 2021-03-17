@@ -4,4 +4,4 @@ configMapGenerator:
       - ./volume/fhirConfig.js
       - ../../package.json
 resources:
-  - ./exmptyboxes-hapi-fhir-config-importer-job.yaml
+  - ./emptyboxes-hapi-fhir-config-importer-job.yaml
