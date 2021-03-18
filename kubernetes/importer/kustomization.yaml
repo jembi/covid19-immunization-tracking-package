@@ -2,6 +2,5 @@ configMapGenerator:
   - name: covid19-immunization-hapi-fhir-config-importer-configmap
     files:
       - ./volume/fhirConfig.js
-      - ../../package.json
 resources:
   - ./emptyboxes-hapi-fhir-config-importer-job.yaml

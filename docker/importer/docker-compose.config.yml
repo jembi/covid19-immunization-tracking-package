@@ -40,17 +40,14 @@ services:
     image: jembi/instantohie-config-importer
     restart: on-failure
     environment:
-      HAPI_FHIR_PATH: '/fhir'
-      HAPI_FHIR_HOSTNAME: 'hapi-fhir'
-      HAPI_FHIR_PORT: 8080
+      HAPI_FHIR_BASE_URL: 'http://hapi-fhir:8080/fhir'
       COVID19_IG_URL: 'https://jembi.github.io/covid19-immunization-ig'
-      COVID19_IG_PROTOCOL: 'http:'
       NODE_ENV: 'production'
     volumes:
       - type: volume
         source: instant
         target: /instant
-    command: sh -c "wait-on -t 60000 http-get://hapi-fhir:8080 && sleep 1 && npm install && node /instant/covid19-immunization-tracking-package/docker/importer/volume/fhirConfig.js"
+    command: sh -c "wait-on -t 60000 http-get://hapi-fhir:8080 && sleep 1 && npm install --prefix /instant/covid19-immunization-tracking-package/ && node /instant/covid19-immunization-tracking-package/docker/importer/volume/fhirConfig.js"
 
 volumes:
   instant:

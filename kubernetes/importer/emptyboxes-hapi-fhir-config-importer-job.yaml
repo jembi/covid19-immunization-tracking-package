@@ -22,18 +22,12 @@ spec:
           args:
             - sh
             - -c
-            - wait-on -t 60000 http-get://hapi-fhir-server-service:8080 && npm install && node fhirConfig.js
+            - wait-on -t 60000 http-get://hapi-fhir-server-service:8080 && npm install axios@0.21.1 adm-zip@0.5.4 && node fhirConfig.js
           env:
-            - name: HAPI_FHIR_PATH
-              value: '/fhir'
-            - name: HAPI_FHIR_HOSTNAME
-              value: hapi-fhir-server-service
-            - name: HAPI_FHIR_PORT
-              value: '8080'
+            - name: HAPI_FHIR_BASE_URL
+              value: 'http://hapi-fhir-server-service:8080/fhir'
             - name: COVID19_IG_URL
               value: 'https://jembi.github.io/covid19-immunization-ig'
-            - name: COVID19_IG_PROTOCOL
-              value: 'http:'
             - name: NODE_ENV
               value: 'production'
           volumeMounts:

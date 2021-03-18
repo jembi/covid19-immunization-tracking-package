@@ -1,57 +1,20 @@
 'use strict'
 
-const http = require('http')
-const axios = require('axios')
+const axios = require('axios').default
 const AdmZip = require('adm-zip')
 
-const HAPI_FHIR_PATH = process.env.HAPI_FHIR_PATH || '/fhir'
-const HAPI_FHIR_HOSTNAME = process.env.HAPI_FHIR_HOSTNAME || 'hapi-fhir'
-const HAPI_FHIR_PORT = process.env.HAPI_FHIR_PORT || 8080
-const COVID19_IG_URL =
-  process.env.COVID19_IG_URL ||
-  'https://jembi.github.io/covid19-immunization-ig'
+const HAPI_FHIR_BASE_URL = process.env.HAPI_FHIR_BASE_URL
+const COVID19_IG_URL = process.env.COVID19_IG_URL
 const resourceTypes = ['CodeSystem', 'ConceptMap', 'ValueSet']
 
 const postToFHIRServer = ({resourceName, data}) =>
   new Promise((resolve, reject) => {
-    const options = {
-      protocol: process.env.COVID19_IG_PROTOCOL || 'http:',
-      host: HAPI_FHIR_HOSTNAME,
-      port: HAPI_FHIR_PORT,
-      path: `${HAPI_FHIR_PATH}/${resourceName}/${JSON.parse(data).id}`,
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(data)
-      }
-    }
+    const url = `${HAPI_FHIR_BASE_URL}/${resourceName}/${JSON.parse(data).id}`
 
-    const req = http.request(options, res => {
-      if (res.statusCode !== 201) {
-        let responseData = ''
-        res.on('data', chunk => {
-          responseData += chunk.toString()
-        })
-
-        res.on('end', () => {
-          if (responseData) {
-            reject(`${resourceName} resource creation failed: ${responseData}`)
-          }
-        })
-
-        res.on('error', reject)
-        return
-      } else {
-        resolve(`Successfully created ${resourceName} resource`)
-      }
-    })
-
-    req.on('error', error => {
-      reject('Failed to add resource: ', error)
-    })
-
-    req.write(data)
-    req.end()
+    axios
+      .put(url, JSON.parse(data))
+      .then(() => resolve(`Successfully created ${resourceName} resource`))
+      .catch(err => reject(`${resourceName} resource creation failed: ${err}`))
   })
 
 const getResources = async url => {
