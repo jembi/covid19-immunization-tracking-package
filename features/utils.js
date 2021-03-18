@@ -13,14 +13,20 @@ const CUSTOM_TOKEN_ID =
 const deleteResource = (id, resourceType) => {
   return axios({
     url: `${OPENHIM_PROTOCOL}://${OPENHIM_API_HOSTNAME}:${OPENHIM_TRANSACTION_API_PORT}/fhir/${resourceType}/${id}`,
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: {
+      Authorization: `Custom ${CUSTOM_TOKEN_ID}`
+    }
   })
 }
 
 const retrieveResource = path => {
   return axios({
     url: `${OPENHIM_PROTOCOL}://${OPENHIM_API_HOSTNAME}:${OPENHIM_TRANSACTION_API_PORT}/fhir/${path}`,
-    method: 'GET'
+    method: 'GET',
+    headers: {
+      Authorization: `Custom ${CUSTOM_TOKEN_ID}`
+    }
   })
 }
 
@@ -55,7 +61,11 @@ exports.sendRequest = async (
     data: data
   })
 
-  if (response.status != 202)
+  if (
+    response.status != 200 &&
+    response.status != 201 &&
+    response.status != 202
+  )
     throw Error(`Sending of request on path ${path} failed`)
   return response
 }
@@ -68,8 +78,8 @@ exports.verifyResourceExistsAndCleanup = async path => {
   }
 
   const deleteResult = await deleteResource(
-    retrievedResult.data.entry[0]._id,
-    retrievedResult.data.entry[0].resourceType
+    retrievedResult.data.entry[0].resource.id,
+    retrievedResult.data.entry[0].resource.resourceType
   )
 
   if (deleteResult.status != 200) {

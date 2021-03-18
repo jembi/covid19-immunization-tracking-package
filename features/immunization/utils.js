@@ -13,8 +13,18 @@ let authorizationError
 const immunization = JSON.parse(
   fs.readFileSync(`${__dirname}/payload/immunization.json`, 'utf8')
 )
+const patient = JSON.parse(
+  fs.readFileSync(`${__dirname}/payload/patient.json`, 'utf8')
+)
+
+// set the immunization patient reference
+immunization.patient.reference = `Patient/${patient.id}`
 
 exports.verifyOpenhimIsRunning = verifyOpenhimIsRunning
+
+exports.ensurePatientExists = async () => {
+  await sendRequest(patient, `fhir/Patient/${patient.id}`, 'PUT')
+}
 
 exports.sendImmunizationAuthorized = async () => {
   await sendRequest(immunization, 'immunization')
@@ -36,6 +46,6 @@ exports.verifyAuthorizationError = () => {
 
 exports.verifyImmunizationExistsAndCleanup = async () => {
   await verifyResourceExistsAndCleanup(
-    `Immunization?patient=${immunization.patient.reference}`
+    `/Immunization?patient=${immunization.patient.reference}`
   )
 }

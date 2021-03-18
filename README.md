@@ -125,3 +125,21 @@ To **create** an immunization, send through the following payload to `/immunizat
   ]
 }
 ```
+
+## Testing
+
+To run the gherkin end to end tests for the Covid19 immunization flows follow the steps below.
+
+For local deployment, update the `.env.local` file in the docker folder with the details for reaching the OpenHIM and run the commands below
+
+```sh
+yarn
+yarn test
+```
+
+For remote deployment, update the `.env.remote` file in the kubernetes folder with the details for reaching the OpenHIM and run the commands below
+
+```sh
+yarn
+yarn test:remote
+```
