@@ -1,7 +1,7 @@
 version: '3.3'
 
 services:
-  mapper:
+  covid19-immunization-mediator:
     image: jembi/openhim-mediator-mapping:v2.3.0
     container_name: covid19-immunization-mediator
     environment:

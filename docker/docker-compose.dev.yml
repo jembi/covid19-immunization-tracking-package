@@ -1,6 +1,6 @@
 version: '3.3'
 
 services:
-  mapper:
+  covid19-immunization-mediator:
     ports:
       - "3003:3003"
