@@ -12,3 +12,4 @@ resources:
   - ./emptyboxes-hapi-fhir-config-importer-job.yaml
   - ./emptyboxes-endpoint-importer-job.yaml
   - ./emptyboxes-mapper-config-importer-job.yaml
+  
