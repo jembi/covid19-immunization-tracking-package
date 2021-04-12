@@ -15,6 +15,16 @@ The following channels are set up:
 - PUT  <http://localhost:5001/patient-registration/{FHIR_ID}>
 - POST <http://localhost:5001/immunization>
 
+### Patient Registration/Update flow
+
+The following diagram is a summary of the Patient registration/update workflow:
+
+![Patient registration/update workflow](patient-registration-update-workflow.png)
+
+1. A patient resource will be sent into the interoperability layer (IOL) from a client application (e.g CommCare). The IOL will have a channel configured listening on `/patient-registration`.
+2. The patient resource will be routed to the mapping mediator which will orchestrate the data. First, the patient will be sent to the Client Registry (CR) to check whether or not it exists. If the patient does not exist in the CR, the record will be created there and the patient resource will also be created in HAPI-FHIR.
+If the patient exists, an update request will be sent to HAPI-FHIR.
+
 ### Patient Resource
 
 To **create** a patient, send through the following payload to `/patient-registration`
