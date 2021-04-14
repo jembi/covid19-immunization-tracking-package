@@ -14,6 +14,8 @@ The following diagram is a summary of the Patient registration/update workflow:
 2. The patient resource will be routed to the mapping mediator which will orchestrate the data. First, the patient will be sent to the Client Registry (CR) to check whether or not it exists. If the patient does not exist in the CR, the record will be created there and the patient resource will also be created in HAPI-FHIR.
 If the patient exists, an update request will be sent to HAPI-FHIR.
 
+> For more information on configuring the OpenHIM Mapping Mediator for an Instant OpenHIE package, please visit the Instant OpenHIE [docs](https://openhie.github.io/instant/docs/how-to/configure-openhim-mapping-mediator).
+
 ## Example message structures
 
 The input message will be sent through the OpenHIM.
