@@ -1,6 +1,6 @@
 # Covid19 Immunization Tracking Package
 
-This package sets up a mapping mediator instance that handles the mapping of COVID-19 vaccinations into FHIR resources.
+This package sets up an [OpenHIM Mapping Mediator](https://jembi.github.io/openhim-mediator-mapping/) instance that handles the mapping of COVID-19 vaccinations into FHIR resources.
 
 To enable this package within the Instant OpenHIE, mount this project directory with your Instant OpenHIE start command. More details available on the [Instant OpenHIE docs site](https://openhie.github.io/instant/docs/how-to/creating-packages#how-to-execute-your-new-package)
 
@@ -14,7 +14,7 @@ The following diagram is a summary of the Patient registration/update workflow:
 2. The patient resource will be routed to the mapping mediator which will orchestrate the data. First, the patient will be sent to the Client Registry (CR) to check whether or not it exists. If the patient does not exist in the CR, the record will be created there and the patient resource will also be created in HAPI-FHIR.
 If the patient exists, an update request will be sent to HAPI-FHIR.
 
-> For more information on configuring the OpenHIM Mapping Mediator for an Instant OpenHIE package, please visit the Instant OpenHIE [docs](https://openhie.github.io/instant/docs/how-to/configure-openhim-mapping-mediator).
+> For more information on configuring the OpenHIM Mapping Mediator for an Instant OpenHIE package, please visit the Instant OpenHIE [docs site](https://openhie.github.io/instant/docs/how-to/configure-openhim-mapping-mediator).
 
 ## Example message structures
 
