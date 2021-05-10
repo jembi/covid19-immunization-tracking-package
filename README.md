@@ -89,6 +89,17 @@ You should receive the created form of the Patient resource in HAPI FHIR - notic
 To **update** a patient, send through the payload above to `/patient-registration/{FHIR_ID}` but add the field `id` to the object root.
 Also substitute in the `id` into the Request path in the `FHIR_ID` placeholder position.
 
+### Patient Search
+
+To **search** for a patient, send a get request to the endpoint `/patient-search`. The following query parameters can be used `_id`, `language`, `active`, `gender` and `given` for the name. To learn more about all the supported search parameters, please visit the FHIR [docs](https://www.hl7.org/fhir/patient.html#search) and the PDQm [docs](https://www.ihe.net/uploadedFiles/Documents/ITI/IHE_ITI_Suppl_PDQm.pdf).
+
+Examples
+
+- GET  <http://localhost:5001/patient-search?_id=1233434545>
+- GET  <http://localhost:5001/patient-search?given=Simon>
+- GET  <http://localhost:5001/patient-search?active=true>
+- GET  <http://localhost:5001/patient-search?gender=male>
+
 ### Immunization Resource
 
 To **create** an immunization, send through the following payload to `/immunization`
