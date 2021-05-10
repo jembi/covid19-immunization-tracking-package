@@ -91,7 +91,7 @@ Also substitute in the `id` into the Request path in the `FHIR_ID` placeholder p
 
 ### Patient Search
 
-To **search** for a patient, send a get request to the endpoint `/patient-search`. The following query parameters can be used `_id`, `language`, `active`, `gender` and `given` for the name. Other search parameters are available [here](https://www.hl7.org/fhir/patient.html#search)
+To **search** for a patient, send a get request to the endpoint `/patient-search`. The following query parameters can be used `_id`, `language`, `active`, `gender` and `given` for the name. To learn more about all the supported search parameters, please visit the FHIR [docs](https://www.hl7.org/fhir/patient.html#search) and the PDQm [docs](https://www.ihe.net/uploadedFiles/Documents/ITI/IHE_ITI_Suppl_PDQm.pdf).
 
 Examples
 
