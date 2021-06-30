@@ -186,7 +186,7 @@
         "forwardExistingRequestBody": true,
         "config": {
           "method": "POST",
-          "url": "http://opencr:3000/fhir/Patient",
+          "url": "http://opencr:3004/fhir/Patient",
           "headers": {
             "Content-Type": "application/json",
             "x-openhim-clientid": "test"
@@ -199,7 +199,7 @@
         "id": "hapi-fhir",
         "config": {
           "method": "PUT",
-          "url": "http://hapi-fhir:8080/fhir/Patient/:fhirId",
+          "url": "http://hapi-fhir-server-service:8080/fhir/Patient/:fhirId",
           "headers": {
             "Content-Type": "application/json"
           },
