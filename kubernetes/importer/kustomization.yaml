@@ -10,7 +10,7 @@ configMapGenerator:
   - name: covid19-immunization-mapper-config-importer-configmap
     files:
       - ./volume/openhimConfig.js
-      - ./volume/openhim-import.js
+      - ./volume/openhim-import.json
 
 resources:
   - ./emptyboxes-hapi-fhir-config-importer-job.yaml
