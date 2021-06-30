@@ -10,5 +10,5 @@ spec:
     component: covid19-immunization-mapper
   ports:
     - name: covid19-immunization-mapper-3005
-      port: 3003
-      targetPort: 3005
+      port: 3005
+      targetPort: 3003
