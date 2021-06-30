@@ -27,17 +27,17 @@ ENDPOINT_FILES.forEach(file => {
     }
   }
 
-  const req = http.request(options, (res) => {
+  const req = http.request(options, res => {
     if (res.statusCode === 400) {
       let data = ''
-      res.on('data', (chunk) => {
+      res.on('data', chunk => {
         data += chunk.toString()
       })
 
       res.on('end', () => {
         if (data) {
           data = JSON.parse(data)
-          if (data.error && data.error.includes("Duplicate error")) {
+          if (data.error && data.error.includes('Duplicate error')) {
             console.log(`Endpoint data from file < ${file} > already exists`)
             return
           }
@@ -45,7 +45,7 @@ ENDPOINT_FILES.forEach(file => {
         }
       })
 
-      res.on('error', (err) => {
+      res.on('error', err => {
         throw Error(err)
       })
       return
@@ -60,7 +60,7 @@ ENDPOINT_FILES.forEach(file => {
     }
   })
 
-  req.on('error', (error) => {
+  req.on('error', error => {
     console.error(
       'Failed to create covid19 immunization mediator endpoint: ',
       error
