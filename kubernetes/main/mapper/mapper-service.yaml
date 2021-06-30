@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: covid19immunization-mapper-service
+  name: covid19-immunization-mapper-service
   labels:
     package: covid19immunization
 spec:
   type: LoadBalancer
   selector:
-    component: covid19immunization-mapper
+    component: covid19-immunization-mapper
   ports:
-    - name: covid19immunization-mapper-3003
+    - name: covid19-immunization-mapper-3005
       port: 3003
-      targetPort: 3003
+      targetPort: 3005
