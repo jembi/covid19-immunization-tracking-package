@@ -43,7 +43,7 @@
       "responseBody": true,
       "rewriteUrlsConfig": [],
       "name": "Patient Covid19 Immunization",
-      "urlPattern": "^/immunization$",
+      "urlPattern": "^/Immunization$",
       "matchContentRegex": null,
       "matchContentXpath": null,
       "matchContentValue": null,
@@ -97,7 +97,7 @@
       "responseBody": true,
       "rewriteUrlsConfig": [],
       "name": "Patient Search",
-      "urlPattern": "^/patient-search.*$",
+      "urlPattern": "^/Patient.*$",
       "matchContentRegex": null,
       "matchContentXpath": null,
       "matchContentValue": null,
@@ -113,9 +113,7 @@
     },
     {
       "methods": [
-        "GET",
         "POST",
-        "DELETE",
         "PUT"
       ],
       "type": "http",
@@ -154,7 +152,7 @@
       "responseBody": true,
       "rewriteUrlsConfig": [],
       "name": "Patient Registration for Covid19 Immunization",
-      "urlPattern": "^/patient-registration.*$",
+      "urlPattern": "^/Patient.*$",
       "matchContentRegex": null,
       "matchContentXpath": null,
       "matchContentValue": null,
