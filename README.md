@@ -29,6 +29,8 @@ The following channels are set up:
 
 ### Patient Resource
 
+> The patient resource to be created is required to have an `identifier` with a `system` of value `"http://openclientregistry.org/fhir/sourceid"`. This is the global `internalid` registered on OpenCR.
+
 To **create** a patient, send through the following payload to `/patient-registration`
 
 ```json
@@ -62,7 +64,7 @@ To **create** a patient, send through the following payload to `/patient-registr
   ],
   "identifier": [
     {
-      "system": "https://jembi.github.io/covid19-immunization-ig/patient-id",
+      "system": "http://openclientregistry.org/fhir/sourceid",
       "value": "12345"
     }
   ],
