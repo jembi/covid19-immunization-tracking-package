@@ -7,13 +7,16 @@ configMapGenerator:
   - name: covid19-immunization-hapi-fhir-config-importer-configmap
     files:
       - ./volume/fhirConfig.js
+  - name: covid19-immunization-opencr-config-importer-configmap
+    files:
+      - ./volume/opencrConfig.js
+      - ./volume/opencr_config.json
   - name: covid19-immunization-mapper-config-importer-configmap
     files:
       - ./volume/openhimConfig.js
       - ./volume/openhim-import.json
-
 resources:
   - ./emptyboxes-hapi-fhir-config-importer-job.yaml
   - ./emptyboxes-endpoint-importer-job.yaml
   - ./emptyboxes-mapper-config-importer-job.yaml
-  
+  - ./emptyboxes-opencr-config-importer-job.yaml
