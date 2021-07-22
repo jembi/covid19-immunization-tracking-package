@@ -2,6 +2,8 @@
 
 This package sets up an [OpenHIM Mapping Mediator](https://jembi.github.io/openhim-mediator-mapping/) instance that handles the mapping of COVID-19 vaccinations into FHIR resources.
 
+![Architecture Diagram](./architecture.png)
+
 To enable this package within the Instant OpenHIE, mount this project directory with your Instant OpenHIE start command. More details available on the [Instant OpenHIE docs site](https://openhie.github.io/instant/docs/how-to/creating-packages#how-to-execute-your-new-package)
 
 ## Patient Registration/Update flow
