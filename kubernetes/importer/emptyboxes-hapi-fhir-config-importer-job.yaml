@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/instance: covid19-immunization-hapi-fhir-config-importer-1
     app.kubernetes.io/version: '0.1'
     app.kubernetes.io/component: hapi-fhir-config-importer
-    package: covid19surveillance
+    package: covid19immunization
 spec:
   backoffLimit: 3
   template:
@@ -22,7 +22,7 @@ spec:
           args:
             - sh
             - -c
-            - wait-on -t 60000 http-get://hapi-fhir-server-service:8080 && npm install axios@0.21.1 adm-zip@0.5.4 && node fhirConfig.js
+            - wait-on -t 60000 http-get://hapi-fhir-server-service:8080 && npm install -g axios@0.21.1 adm-zip@0.5.4 && node fhirConfig.js
           env:
             - name: HAPI_FHIR_BASE_URL
               value: 'http://hapi-fhir-server-service:8080/fhir'

@@ -49,6 +49,19 @@ services:
         target: /instant
     command: sh -c "wait-on -t 60000 http-get://hapi-fhir:8080 && sleep 1 && npm install --prefix /instant/covid19-immunization-tracking-package/ && node /instant/covid19-immunization-tracking-package/docker/importer/volume/fhirConfig.js"
 
+  opencr-config-importer:
+    container_name: opencr-config-importer
+    image: jembi/instantohie-config-importer
+    restart: on-failure
+    environment:
+      OPENCR_HOST_NAME: 'opencr'
+      OPENCR_API_PORT: 3000
+    volumes:
+      - type: volume
+        source: instant
+        target: /instant
+    command: sh -c "wait-on -t 60000 http-get://opencr:3000/crux && sleep 1 && node /instant/covid19-immunization-tracking-package/docker/importer/volume/opencrConfig.js"
+
 volumes:
   instant:
     external: true
