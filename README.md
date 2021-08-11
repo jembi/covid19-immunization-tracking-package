@@ -12,7 +12,7 @@ The following diagram is a summary of the Patient registration/update workflow:
 
 ![Patient registration/update workflow](patient-registration-update-workflow.png)
 
-1. A patient resource will be sent into the interoperability layer (IOL) from a client application (e.g CommCare). The IOL will have a channel configured listening on `/patient-registration`.
+1. A patient resource will be sent into the interoperability layer (IOL) from a client application (e.g CommCare). The IOL will have a channel configured listening on `/Patient`.
 2. The patient resource will be routed to the mapping mediator which will orchestrate the data. First, the patient will be sent to the Client Registry (CR) to check whether or not it exists. If the patient does not exist in the CR, the record will be created there and the patient resource will also be created in HAPI-FHIR.
 If the patient exists, an update request will be sent to HAPI-FHIR.
 
@@ -24,16 +24,16 @@ The input message will be sent through the OpenHIM.
 
 The following channels are set up:
 
-- GET  <http://localhost:5001/patient-search>
-- POST <http://localhost:5001/patient-registration>
-- PUT  <http://localhost:5001/patient-registration/{FHIR_ID}>
-- POST <http://localhost:5001/immunization>
+- GET  <http://localhost:5001/Patient>
+- POST <http://localhost:5001/Patient>
+- PUT  <http://localhost:5001/Patient/{FHIR_ID}>
+- POST <http://localhost:5001/Immunization>
 
 ### Patient Resource
 
-> The patient resource to be created is required to have an `identifier` with a `system` of value `"http://openclientregistry.org/fhir/sourceid"`. This is the global `internalid` registered on OpenCR.
+> The patient resource to be created is required to have an `identifier` with a `system` of value `"https://jembi.github.io/covid19-immunization-ig/patient-id"`. This is the global `internalid` registered on OpenCR.
 
-To **create** a patient, send through the following payload to `/patient-registration`
+To **create** a patient, send through the following payload to `/Patient`
 
 ```json
 {
@@ -66,7 +66,7 @@ To **create** a patient, send through the following payload to `/patient-registr
   ],
   "identifier": [
     {
-      "system": "http://openclientregistry.org/fhir/sourceid",
+      "system": "https://jembi.github.io/covid19-immunization-ig/patient-id",
       "value": "12345"
     }
   ],
@@ -90,23 +90,23 @@ To **create** a patient, send through the following payload to `/patient-registr
 
 You should receive the created form of the Patient resource in HAPI FHIR - notice the Resource now has an `id` field.
 
-To **update** a patient, send through the payload above to `/patient-registration/{FHIR_ID}` but add the field `id` to the object root.
+To **update** a patient, send through the payload above to `/Patient/{FHIR_ID}` but add the field `id` to the object root.
 Also substitute in the `id` into the Request path in the `FHIR_ID` placeholder position.
 
 ### Patient Search
 
-To **search** for a patient, send a get request to the endpoint `/patient-search`. The following query parameters can be used `_id`, `language`, `active`, `gender` and `given` for the name. To learn more about all the supported search parameters, please visit the FHIR [docs](https://www.hl7.org/fhir/patient.html#search) and the PDQm [docs](https://www.ihe.net/uploadedFiles/Documents/ITI/IHE_ITI_Suppl_PDQm.pdf).
+To **search** for a patient, send a get request to the endpoint `/Patient`. The following query parameters can be used `_id`, `language`, `active`, `gender` and `given` for the name. To learn more about all the supported search parameters, please visit the FHIR [docs](https://www.hl7.org/fhir/patient.html#search) and the PDQm [docs](https://www.ihe.net/uploadedFiles/Documents/ITI/IHE_ITI_Suppl_PDQm.pdf).
 
 Examples
 
-- GET  <http://localhost:5001/patient-search?_id=1233434545>
-- GET  <http://localhost:5001/patient-search?given=Simon>
-- GET  <http://localhost:5001/patient-search?active=true>
-- GET  <http://localhost:5001/patient-search?gender=male>
+- GET  <http://localhost:5001/Patient?_id=1233434545>
+- GET  <http://localhost:5001/Patient?given=Simon>
+- GET  <http://localhost:5001/Patient?active=true>
+- GET  <http://localhost:5001/Patient?gender=male>
 
 ### Immunization Resource
 
-To **create** an immunization, send through the following payload to `/immunization`
+To **create** an immunization, send through the following payload to `/Immunization`
 
 ```json
 {

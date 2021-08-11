@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   covid19-immunization-mediator:
-    image: jembi/openhim-mediator-mapping:v2.3.1
+    image: jembi/openhim-mediator-mapping:v3.0.0
     container_name: covid19-immunization-mediator
     environment:
       - OPENHIM_URL=https://core:8080
