@@ -171,13 +171,16 @@
       "requestBody"
     ]
   },
+  "inputTransforms": {
+    "opencr_golden_id": "{'value': lookupRequests.resolvePatient.headers.locationcruid, 'system': constants.opencr.system}"
+  },
   "inputMapping": {
     "requestBody": {
       "transform": {
         "function": "passThroughObject"
       }
     },
-    "constants.opencr": "identifier[]+"
+    "transforms.opencr_golden_id": "identifier[]+"
   },
   "requests": {
     "lookup": [
@@ -216,7 +219,6 @@
   },
   "constants": {
     "opencr": {
-      "value": "Patient/testUID",
       "system": "http://instantopenhie.org/opencr"
     }
   }
