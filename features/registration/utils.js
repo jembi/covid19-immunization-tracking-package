@@ -17,13 +17,13 @@ const patient = JSON.parse(
 exports.verifyOpenhimIsRunning = verifyOpenhimIsRunning
 
 exports.sendRegistrationAuthorized = async () => {
-  const result = await sendRequest(patient, 'patient-registration')
+  const result = await sendRequest(patient, 'Patient')
   patientId = result.data.id
 }
 
 exports.sendRegistrationUnAuthorized = async () => {
   try {
-    await sendRequest(patient, 'patient-registration', 'POST', 'invalid Token')
+    await sendRequest(patient, 'Patient', 'POST', 'invalid Token')
   } catch (_err) {
     authorizationError = true
   }

@@ -17,13 +17,13 @@ const patient = JSON.parse(
 exports.verifyOpenhimIsRunning = verifyOpenhimIsRunning
 
 exports.ensurePatientExists = async () => {
-  const result = await sendRequest(patient, 'patient-registration')
+  const result = await sendRequest(patient, 'Patient')
   patientId = result.data.id
 }
 
 exports.getPatientUnAuthorized = async () => {
   try {
-    await sendRequest('', 'patient-search', 'GET', 'invalid Token')
+    await sendRequest('', 'Patient', 'GET', 'invalid Token')
   } catch (_err) {
     authorizationError = true
   }
@@ -32,7 +32,7 @@ exports.getPatientUnAuthorized = async () => {
 exports.getPatientAuthorized = async () => {
   const response = await sendRequest(
     '',
-    `patient-search?_id=${patientId}`,
+    `Patient?_id=${patientId}`,
     'GET'
   )
   retrievedPatient = response.data.entry[0].resource
