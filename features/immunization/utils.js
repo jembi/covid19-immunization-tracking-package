@@ -27,12 +27,12 @@ exports.ensurePatientExists = async () => {
 }
 
 exports.sendImmunizationAuthorized = async () => {
-  await sendRequest(immunization, 'immunization')
+  await sendRequest(immunization, 'Immunization')
 }
 
 exports.sendImmunizationUnAuthorized = async () => {
   try {
-    await sendRequest(immunization, 'immunization', 'POST', 'Invalid token')
+    await sendRequest(immunization, 'Immunization', 'POST', 'Invalid token')
   } catch (err) {
     if (err.response.status == 401) {
       authorizationError = true

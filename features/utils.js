@@ -8,7 +8,7 @@ const OPENHIM_TRANSACTION_API_PORT =
   process.env.OPENHIM_TRANSACTION_API_PORT || '5001'
 const OPENHIM_API_PORT = process.env.OPENHIM_API_PORT || '8080'
 const CUSTOM_TOKEN_ID =
-  process.env.CUSTOM_TOKEN_ID || '8c161731-4e72-4446-8950-ce79aadaa75c'
+  process.env.CUSTOM_TOKEN_ID || 'test'
 
 const deleteResource = (id, resourceType) => {
   return axios({
